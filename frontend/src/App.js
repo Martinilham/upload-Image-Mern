@@ -20,7 +20,7 @@ const ImageUpload = () => {
     formData.append('photo', file);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload-image', formData, {
+      const response = await axios.post('https://upload-image-mern.vercel.app/upload-image', formData, {
         method: "POST",
           headers: {
             'Content-Type': 'application/json',
