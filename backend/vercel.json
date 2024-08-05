@@ -1,16 +1,25 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@vercel/node"
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/public/uploads/(.*)",
+      "dest": "/public/uploads"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Authorization"
       }
-    ],
-    "routes": [
-      { "src": "/(.*)",
-      "dest": "/" },
-      { "src": "./public/uploads/(.*)",
-      "dest": "/public/uploads" }
-    ]
-  }
-  
+    }
+  ]
+}
