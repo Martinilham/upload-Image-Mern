@@ -24,31 +24,23 @@ const upload = multer({
 })
 
 export const gambar = ()=>{
-    upload.single("photo"),async(req,res) => {
-        const {
-            nama,
-        } = req.body
-    
-        const upload = await cloudinary.uploader.upload(req.file.path);
-    
+    upload.single('photo'), async (req, res) => {
+        const { nama } = req.body;
+        
         try {
-
-            // const date = moment(new Date()).format("YYYY-MM-DD");
-            
+            const uploadResult = req.file;
+    
             const userBaru = new User({
-                nama:nama,
-                profilImage:upload.secure_url
-            })
-
+                nama: nama,
+                profilImage: uploadResult.path 
+            });
+    
             const sendData = await userBaru.save();
-
-            res.status(201).json({status:201,userBaru,message:"Data berhasil disimpan di Database"})
-
-        }catch(error){
-            res.status(401).json({status:401,message:"Data gagal dikirim"})
+            res.status(201).json({ status: 201, userBaru, message: "Data berhasil disimpan di Database" });
+        } catch (error) {
+            res.status(401).json({ status: 401, message: "Data gagal dikirim", error: error.message });
         }
-    }
-}
+    }};
 
 export const updateImage = ()=>{
     upload.single("photo"),async(req,res)=>{

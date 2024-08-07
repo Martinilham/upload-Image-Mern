@@ -20,14 +20,14 @@ const ImageUpload = () => {
     formData.append('photo', file);
 
     try {
-      const response = await axios.post('https://upload-image-mern.vercel.app/upload-image', formData, {
+      const response = await axios.post('http://localhost:5000/register', formData, {
         method: "POST",
           headers: {
             'Content-Type': 'application/json',
             "Content-Type": "multipart/form-data"
           }
       });
-      setMessage(response.data.message);
+      setMessage(response.data);
     } catch (error) {
       setMessage('Error uploading file: ' + error.message);
     }
